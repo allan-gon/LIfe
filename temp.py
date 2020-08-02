@@ -6,11 +6,11 @@ import pygame
 
 def make_grid(win_x, win_y, size):
     """
-    Create a multi-dimensional LIST full of Cell instances
+    Create a multi-dimensional array full of instances off the Cell class
     :param win_x: desired window's x pixels
     :param win_y: desired window's y pixels
-    :param size: the size of each cell
-    :return: multi-dimensional LIST full of Cell instances
+    :param size:
+    :return: multi-dimensional array full of instances off the Cell class
     """
     rows = int(win_y / size)
     cols = int(win_x / size)
@@ -28,14 +28,11 @@ def make_grid(win_x, win_y, size):
 
 def link(iterable):
     """
-    Gives each instance a neighbor attribute which is a dictionary that contains all
-    the neighbors. Really proud of making it so that it doesn't freak out because the edge
-    cells don't have certain neighbors
-    :param iterable: a multi-dimensional LIST whose elements are only instances of the
+    Links up each cell with their neighbors
+    :param iterable: a multi-dimensional array whose elements are only instances of the
     Cell class
-    :return: Multi-dimensional LIST whose elements are only instances of the
-    Cell class but each cell NOW has a neighbor attribute which is a dictionary containing
-    you guessed it all their neighboors
+    :return: Multi-dimensional array whose elements are only instances of the
+    Cell class but each cell has their neighbors now
     """
 
     for i in range(len(iterable)):
@@ -68,10 +65,6 @@ def link(iterable):
 
 
 def main():
-    """
-    Draws the window and cells
-    :return: game window to watch Conway's game of life happen
-    """
     # set constants
     width = 600
     height = 600
