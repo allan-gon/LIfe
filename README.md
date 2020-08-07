@@ -4,7 +4,7 @@ Makes Conway's game of life with pygame
 # How to use it
 There is a single dependency, pygame so either pi install that
 in the environment or use Pipenv and simply cd into the directory
-where this repo is located call pip shell, pip update and it should
+where this repo is located call pipenv shell, pipenv update and it should
 install dependencies for you *I think*
 
 To actually see stuff happen run the demo.py file. So for example
