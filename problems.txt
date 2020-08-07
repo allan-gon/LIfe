@@ -1,0 +1,4 @@
+Only works perfectly with squares... strange.
+If I put rectangle dimension say 900 x 800 the left most rows just never color and aren't interacted with
+
+Debug draws so i think that the problem is in link. Maybe the right most dont get linked so they by default are dead

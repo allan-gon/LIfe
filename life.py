@@ -1,5 +1,4 @@
 from my_class import Cell
-from time import sleep
 from random import choice
 import pygame
 
@@ -12,14 +11,16 @@ def make_grid(win_x, win_y, size):
     :param size: the size of each cell
     :return: multi-dimensional LIST full of Cell instances
     """
-    rows = int(win_y / size)
-    cols = int(win_x / size)
+    cols = win_y // size
+    rows = win_x // size
     grid = []
+    # making rows and cols in list because np arrays didn't like objects
     for i in range(rows):
         temp_row = []
         for j in range(cols):
             temp_row.append(0)
         grid.append(temp_row)
+    # replacing the garbage i put in the list to make it with actual cell instances
     for i in range(rows):
         for j in range(cols):
             grid[i][j] = Cell(i * size, j * size, choice([True, False]))
@@ -62,24 +63,25 @@ def link(iterable):
                 if any(_ < 0 for _ in v) or any(_ >= len(iterable[0]) for _ in v):
                     pass
                 else:
-                    # print(f"Key: {k}, Value: {v}")
                     iterable[i][j].neighbors[k] = iterable[v[0]][v[-1]]
     return iterable
 
 
-def main():
+def main(width=800, height=800):
     """
     Draws the window and cells
     :return: game window to watch Conway's game of life happen
     """
     # set constants
-    width = 600
-    height = 600
+    width = width
+    height = height
     size = 10
     white = (255, 255, 255)
     black = (0, 0, 0)
     # create grid
     grid = make_grid(width, height, size)
+    # debugging
+    print(f"Rows: {len(grid)}, Cols: {len(grid[0])}")
     # init  game and make window
     pygame.init()
     win = pygame.display
@@ -92,19 +94,23 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+        # makes black background
         surface.fill(black)
-        win.update
+        # for each cell if alive draw it
         for row in grid:
             for cell in row:
                 cell.live_or_die()
                 if cell.currently_alive:
                     pygame.draw.rect(surface, white, (cell.x, cell.y, size, size), 1)
+        # update the screen
         win.update()
+        # for each cell update the state
+        # had to do this separately because each cells state is dependent on it's neighbors
         for row in grid:
             for cell in row:
                 cell.update()
-        sleep(.2)
     return
+
 
 if __name__ == "__main__":
     main()
